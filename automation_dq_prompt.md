@@ -1,6 +1,37 @@
-You are running unattended in a Snowflake AGENT TASK. Complete the task autonomously.
+You are running unattended in a Snowflake AGENT TASK. Complete the task autonomously and do NOT ask clarifying questions.
 
 ## Task: Supply Chain Ontology Data Quality Monitor
 
-Check row counts for all 15 tables, validate Fill Rate and OTD Rate metrics,
-confirm semantic view and agent health. Email report via gather_email_content.
+Run a comprehensive data quality check on the SUPPLY_CHAIN_HUB database.
+
+### Step 1: Row Count Check
+Run this SQL and report the results as a table:
+
+```sql
+SELECT 'CUSTOMERS' AS TBL, COUNT(*) AS ROW_CT FROM SUPPLY_CHAIN_HUB.RAW.CUSTOMERS
+UNION ALL SELECT 'PLANTS', COUNT(*) FROM SUPPLY_CHAIN_HUB.RAW.PLANTS
+UNION ALL SELECT 'INVENTORY', COUNT(*) FROM SUPPLY_CHAIN_HUB.RAW.INVENTORY
+UNION ALL SELECT 'ORDERS', COUNT(*) FROM SUPPLY_CHAIN_HUB.RAW.ORDERS
+UNION ALL SELECT 'ORDER_LINES', COUNT(*) FROM SUPPLY_CHAIN_HUB.RAW.ORDER_LINES
+UNION ALL SELECT 'SHIPMENTS', COUNT(*) FROM SUPPLY_CHAIN_HUB.RAW.SHIPMENTS
+UNION ALL SELECT 'SHIPMENT_LINES', COUNT(*) FROM SUPPLY_CHAIN_HUB.RAW.SHIPMENT_LINES
+UNION ALL SELECT 'SHIPMENT_EVENTS', COUNT(*) FROM SUPPLY_CHAIN_HUB.RAW.SHIPMENT_EVENTS
+UNION ALL SELECT 'CARRIERS', COUNT(*) FROM SUPPLY_CHAIN_HUB.RAW.CARRIERS
+UNION ALL SELECT 'ROUTES', COUNT(*) FROM SUPPLY_CHAIN_HUB.RAW.ROUTES
+UNION ALL SELECT 'PARTS', COUNT(*) FROM SUPPLY_CHAIN_HUB.RAW.PARTS
+UNION ALL SELECT 'SUPPLIERS', COUNT(*) FROM SUPPLY_CHAIN_HUB.RAW.SUPPLIERS
+UNION ALL SELECT 'SUPPLIER_PARTS', COUNT(*) FROM SUPPLY_CHAIN_HUB.RAW.SUPPLIER_PARTS
+UNION ALL SELECT 'SUPPLIER_PERFORMANCE', COUNT(*) FROM SUPPLY_CHAIN_HUB.RAW.SUPPLIER_PERFORMANCE
+UNION ALL SELECT 'VEHICLE_TELEMETRY', COUNT(*) FROM SUPPLY_CHAIN_HUB.RAW.VEHICLE_TELEMETRY
+ORDER BY ROW_CT DESC;
+```
+
+### Step 2: Metric Consistency Check
+Check Fill Rate and On-Time Delivery Rate.
+
+### Step 3: Semantic View + Agent Health
+DESCRIBE SEMANTIC VIEW and SHOW AGENTS.
+
+### Step 4: Report
+Call gather_email_content with subject "Supply Chain Ontology - Daily Quality Report".
+Then print: SUPPLY_CHAIN_DQ_OK total_rows=<N> fill_rate=<X> otd_rate=<Y>
