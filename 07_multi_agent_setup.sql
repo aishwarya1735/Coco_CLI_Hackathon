@@ -1,0 +1,3 @@
+-- MULTI-AGENT SETUP: Orchestrator + 3 Specialist Agents + MCP Server
+-- See file in workspace for full SQL
+-- Run 07_multi_agent_setup.sql from the workspace for the complete agent definitions
